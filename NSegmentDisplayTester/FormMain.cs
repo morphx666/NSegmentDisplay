@@ -109,7 +109,7 @@ namespace NSegmentDisplay {
                                  i * (display.Bounds.Width + 2) +
                                 (i >= 2 ? ssc.Width : 0) +
                                 (i >= 4 ? ssc.Width : 0) +
-                                (i >= 6 ? (i - 1) * (ssc.Width + ssc.Thickness) - 2 * ssc.Width : 0) +
+                                (i >= 6 ? i * (display.Bounds.Width - 2 * padding - ssc.Thickness / 2) : 0) +
                                 (i >= 9 ? ssc.Width : 0);
                 display.Y = (i >= 6 ? ssc.Y + ssc.Height + ssc.Thickness / 2 : ssc.Y);
                 display.ForeColorOff = ssc.ForeColorOff;
