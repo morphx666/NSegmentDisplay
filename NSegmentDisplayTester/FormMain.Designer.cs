@@ -43,9 +43,10 @@
             this.LabelHelp2.Location = new System.Drawing.Point(15, 35);
             this.LabelHelp2.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.LabelHelp2.Name = "LabelHelp2";
-            this.LabelHelp2.Size = new System.Drawing.Size(314, 17);
+            this.LabelHelp2.Size = new System.Drawing.Size(333, 34);
             this.LabelHelp2.TabIndex = 0;
-            this.LabelHelp2.Text = "Use Up/Down arrows to change segments\' thickness";
+            this.LabelHelp2.Text = "Use [W]width/[H]eight/[P]adding/[T]hickness to increase\r\neach parameter (hold SHI" +
+    "FT key to decrease)";
             // 
             // FormMain
             // 
