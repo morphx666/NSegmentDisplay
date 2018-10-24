@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace NSegmentDisplay {
@@ -120,7 +121,38 @@ namespace NSegmentDisplay {
             }
         }
 
-        public abstract void Render(Graphics g);
         public abstract void SetupSegments();
+
+        public virtual void Render(Graphics g) {
+            using(SolidBrush b = new SolidBrush(BackColor)) {
+                g.FillRectangle(b, this.Bounds);
+            }
+
+            int encoding = Encodings[Value];
+            for(int i = segments.Length - 1; i >= 0; i--) {
+                //int x = segments[i].X;
+                //int y = segments[i].Y;
+                //if(segments[i].Orientation == Segment.Orientations.Vertical) {
+                //    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                //    g.TranslateTransform(this.Bounds.X, this.Bounds.Bottom);
+                //    g.RotateTransform(5);
+                //    g.TranslateTransform(-this.Bounds.X, -this.Bounds.Bottom);
+                //} else {
+                //    segments[i].X += (this.Bounds.Bottom - y) / 10;
+                //    segments[i].Y += (this.Bounds.Bottom - y) / 20;
+                //}
+
+                segments[i].State = (encoding & (int)Math.Pow(2, i)) != 0;
+                segments[i].Render(g);
+                //encoding = encoding >> 1;
+
+                //if(segments[i].Orientation == Segment.Orientations.Vertical) {
+                //    g.ResetTransform();
+                //} else {
+                //    segments[i].X = x;
+                //    segments[i].Y = y;
+                //}
+            }
+        }
     }
 }

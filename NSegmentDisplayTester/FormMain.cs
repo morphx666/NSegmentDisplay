@@ -32,7 +32,8 @@ namespace NSegmentDisplay {
 
         private void FormMain_Load(object sender, EventArgs e) {
             CreateDisplay();
-            LabelHelp.ForeColor = ssc.ForeColorOn;
+            LabelHelp1.ForeColor = ssc.ForeColorOn;
+            LabelHelp2.ForeColor = ssc.ForeColorOn;
 
             Task.Run(() => {
                 while(true) {
@@ -48,13 +49,7 @@ namespace NSegmentDisplay {
                 }
             });
 
-            this.Resize += (object o1, EventArgs e1) => {
-                Rectangle a = this.DisplayRectangle;
-                Rectangle b = ssc.Bounds;
-                ssc.X = (a.Width - b.Width) / 2;
-                ssc.Y = (a.Height - b.Height) / 2;
-            };
-            this.OnResize(new EventArgs());
+            this.Resize += (object o1, EventArgs e1) => CenterDisplay();
 
             this.KeyDown += (object o1, KeyEventArgs e1) => {
                 lock(ssc) {
@@ -67,17 +62,35 @@ namespace NSegmentDisplay {
                             supportedDisplayIndex = (supportedDisplayIndex + 1) % supportedDisplays.Length;
                             CreateDisplay();
                             break;
+                        case Keys.Up:
+                            ssc.Thickness += 1;
+                            CreateDisplay();
+                            break;
+                        case Keys.Down:
+                            if(ssc.Thickness > 1) {
+                                ssc.Thickness -= 1;
+                                CreateDisplay();
+                            }
+                            break;
                     }
                 }
             };
         }
 
+        private void CenterDisplay() {
+            Rectangle a = this.DisplayRectangle;
+            Rectangle b = ssc.Bounds;
+            ssc.X = (a.Width - b.Width) / 2;
+            ssc.Y = (a.Height - b.Height) / 2;
+        }
+
         private void CreateDisplay() {
-            int p = 2;
+            int p = 4;
             ssc.Clear();
             for(int i = 0; i < 10; i++) {
                 NSegments display = (NSegments)Activator.CreateInstance(supportedDisplays[supportedDisplayIndex]);
-                display.X = ssc.X + i * 2 * (ssc.Width + p) +
+                display.X = ssc.X + ssc.Thickness * i +
+                                 i * (ssc.Width + 3 * (ssc.Thickness / 2 + p / 2 + 2)) +
                                 (i >= 2 ? ssc.Width : 0) +
                                 (i >= 4 ? ssc.Width : 0) +
                                 (i >= 6 ? ssc.Width : 0) +
@@ -95,6 +108,8 @@ namespace NSegmentDisplay {
                 ssc.Add(display);
             }
             ssc[ssc.Count - 1].Encodings.Add(0b1110011); // P
+
+            CenterDisplay();
         }
 
         private int To12(int h) {

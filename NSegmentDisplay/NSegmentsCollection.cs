@@ -122,8 +122,8 @@ namespace NSegmentDisplay {
                     Rectangle b = sc.Bounds;
                     if(b.X < r.X) r.X = b.X;
                     if(b.Y < r.Y) r.Y = b.Y;
-                    if(b.Right > r.Right) r.Width = b.Right-mX;
-                    if(b.Bottom > r.Bottom) r.Height = b.Bottom-mY;
+                    if(b.Right > r.Right) r.Width = b.Right - mX;
+                    if(b.Bottom > r.Bottom) r.Height = b.Bottom - mY;
                 });
                 return r;
             }

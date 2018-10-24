@@ -23,17 +23,29 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.LabelHelp = new System.Windows.Forms.Label();
+            this.LabelHelp1 = new System.Windows.Forms.Label();
+            this.LabelHelp2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // LabelHelp
+            // LabelHelp1
             // 
-            this.LabelHelp.AutoSize = true;
-            this.LabelHelp.Location = new System.Drawing.Point(14, 12);
-            this.LabelHelp.Name = "LabelHelp";
-            this.LabelHelp.Size = new System.Drawing.Size(350, 17);
-            this.LabelHelp.TabIndex = 0;
-            this.LabelHelp.Text = "Use Left/Right arrows to change supported display modes";
+            this.LabelHelp1.AutoSize = true;
+            this.LabelHelp1.Location = new System.Drawing.Point(15, 12);
+            this.LabelHelp1.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.LabelHelp1.Name = "LabelHelp1";
+            this.LabelHelp1.Size = new System.Drawing.Size(350, 17);
+            this.LabelHelp1.TabIndex = 0;
+            this.LabelHelp1.Text = "Use Left/Right arrows to change supported display modes";
+            // 
+            // LabelHelp2
+            // 
+            this.LabelHelp2.AutoSize = true;
+            this.LabelHelp2.Location = new System.Drawing.Point(15, 35);
+            this.LabelHelp2.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.LabelHelp2.Name = "LabelHelp2";
+            this.LabelHelp2.Size = new System.Drawing.Size(314, 17);
+            this.LabelHelp2.TabIndex = 0;
+            this.LabelHelp2.Text = "Use Up/Down arrows to change segments\' thickness";
             // 
             // FormMain
             // 
@@ -41,7 +53,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
             this.ClientSize = new System.Drawing.Size(964, 401);
-            this.Controls.Add(this.LabelHelp);
+            this.Controls.Add(this.LabelHelp2);
+            this.Controls.Add(this.LabelHelp1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Gainsboro;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -58,7 +71,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LabelHelp;
+        private System.Windows.Forms.Label LabelHelp1;
+        private System.Windows.Forms.Label LabelHelp2;
     }
 }
 
