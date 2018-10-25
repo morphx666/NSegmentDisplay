@@ -16,7 +16,7 @@ namespace NSegmentDisplay {
             ForeColorOn = Color.FromArgb(31, 31, 31),
             BackColor = Color.FromArgb(211, 211, 211)
         };
-        private Type[] supportedDisplays = { typeof(N7Segments), typeof(N9Segments) };
+        private Type[] supportedDisplays = { typeof(N7Segments), typeof(N9Segments), typeof(N14Segments) };
         private int supportedDisplayIndex = 0;
         private int padding = 4;
 

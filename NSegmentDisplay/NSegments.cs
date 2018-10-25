@@ -28,7 +28,7 @@ namespace NSegmentDisplay {
         public List<int> Encodings { get; } = new List<int>();
         public int Value {
             get => mValue;
-            set => mValue = value;// % Encodings.Count;
+            set => mValue = value % Encodings.Count;
         }
 
         public new int X {
@@ -130,28 +130,8 @@ namespace NSegmentDisplay {
 
             int encoding = Encodings[Value];
             for(int i = segments.Length - 1; i >= 0; i--) {
-                //int x = segments[i].X;
-                //int y = segments[i].Y;
-                //if(segments[i].Orientation == Segment.Orientations.Vertical) {
-                //    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                //    g.TranslateTransform(this.Bounds.X, this.Bounds.Bottom);
-                //    g.RotateTransform(5);
-                //    g.TranslateTransform(-this.Bounds.X, -this.Bounds.Bottom);
-                //} else {
-                //    segments[i].X += (this.Bounds.Bottom - y) / 10;
-                //    segments[i].Y += (this.Bounds.Bottom - y) / 20;
-                //}
-
                 segments[i].State = (encoding & (int)Math.Pow(2, i)) != 0;
                 segments[i].Render(g);
-                //encoding = encoding >> 1;
-
-                //if(segments[i].Orientation == Segment.Orientations.Vertical) {
-                //    g.ResetTransform();
-                //} else {
-                //    segments[i].X = x;
-                //    segments[i].Y = y;
-                //}
             }
         }
     }

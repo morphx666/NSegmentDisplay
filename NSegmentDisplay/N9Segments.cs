@@ -35,14 +35,22 @@ namespace NSegmentDisplay {
 
             if(segments.Length == 9) {
                 // H
-                base.segments[7].Orientation = Segment.Orientations.DiagonalRight;
+                base.segments[7].Orientation = Segment.Orientations.Diagonal;
                 base.segments[7].X = segments[6].X;
                 base.segments[7].Y = segments[6].Y;
+                base.segments[7].SrcX = base.segments[4].X;
+                base.segments[7].SrcY = segments[6].Y + Thickness / 2;
+                base.segments[7].TrgX = base.segments[1].X;
+                base.segments[7].TrgY = segments[0].Y;
 
                 // I
-                base.segments[8].Orientation = Segment.Orientations.DiagonalRight;
+                base.segments[8].Orientation = Segment.Orientations.Diagonal;
                 base.segments[8].X = segments[3].X;
                 base.segments[8].Y = segments[3].Y;
+                base.segments[8].SrcX = base.segments[4].X;
+                base.segments[8].SrcY = segments[3].Y + Thickness / 2;
+                base.segments[8].TrgX = base.segments[1].X;
+                base.segments[8].TrgY = segments[6].Y + Thickness / 2;
             }
         }
     }
