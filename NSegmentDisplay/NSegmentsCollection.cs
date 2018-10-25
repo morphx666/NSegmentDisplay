@@ -20,6 +20,7 @@ namespace NSegmentDisplay {
         private Color mForeColorOff;
         private Color mForeColorOn;
         private Color mBackColor = Color.Transparent;
+        private string mText;
 
         public List<NSegments> NSegments { get; } = new List<NSegments>();
 
@@ -132,17 +133,21 @@ namespace NSegmentDisplay {
 
         public string Text {
             get {
-                return "";
+                return mText;
             }
             set {
-                for(int i = NSegments.Count - 1; i >= 0; i--) {
-                    char c = i < value.Length ? value[i] : ' ';
-                    if(char.IsDigit(c)) {
-                        NSegments[i].Value = (int)c - (int)'0';
-                    } else if(c==' ') {
-                        NSegments[i].Value = NSegments[i].Encodings.Count - 1;
-                    } else if(char.IsLetter(c)) {
-                        NSegments[i].Value = (int)(c.ToString().ToUpper()[0]) - (int)'A' + 10;
+                if(mText != value) {
+                    mText = value;
+
+                    for(int i = NSegments.Count - 1; i >= 0; i--) {
+                        char c = i < mText.Length ? mText[i] : ' ';
+                        if(char.IsDigit(c)) {
+                            NSegments[i].Value = (int)c - (int)'0';
+                        } else if(c == ' ') {
+                            NSegments[i].Value = NSegments[i].Encodings.Count - 1;
+                        } else if(char.IsLetter(c)) {
+                            NSegments[i].Value = (int)(c.ToString().ToUpper()[0]) - (int)'A' + 10;
+                        }
                     }
                 }
             }

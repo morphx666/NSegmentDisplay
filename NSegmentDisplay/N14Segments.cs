@@ -66,50 +66,53 @@ namespace NSegmentDisplay {
             if(segments.Length == 14) {
                 // I
                 segments[8].Orientation = Segment.Orientations.Diagonal;
-                segments[8].X = segments[1].X + mThickness / 2;
-                segments[8].Y = segments[0].Y + mThickness / 2;
-                segments[8].TrgX = segments[6].X + mWidth / 2;
-                segments[8].TrgY = segments[6].Y + mThickness / 2;
+                segments[8].X = segments[1].X - mThickness / 2;
+                segments[8].Y = segments[0].Y + mThickness + mThickness / 2;
+                segments[8].TrgX = segments[6].X + mWidth / 2 + mThickness / 2;
+                segments[8].TrgY = segments[6].Y - mThickness / 2;
 
                 // J
                 segments[9].Orientation = Segment.Orientations.Diagonal;
-                segments[9].X = segments[4].X + mThickness / 2;
-                segments[9].Y = segments[3].Y + mThickness / 2;
-                segments[9].TrgX = segments[6].X + mWidth / 2;
-                segments[9].TrgY = segments[6].Y + mThickness / 2;
+                segments[9].X = segments[4].X + mThickness + mThickness / 2;
+                segments[9].Y = segments[3].Y - mThickness / 2;
+                segments[9].TrgX = segments[6].X + mWidth / 2 - mThickness / 2;
+                segments[9].TrgY = segments[6].Y + mThickness + mThickness / 2;
 
                 // K
                 segments[10].Orientation = Segment.Orientations.Diagonal;
-                segments[10].X = segments[5].X + mThickness / 2;
-                segments[10].Y = segments[0].Y + mThickness / 2;
-                segments[10].TrgX = segments[6].X + mWidth / 2;
-                segments[10].TrgY = segments[6].Y + mThickness / 2;
+                segments[10].X = segments[5].X + mThickness + mThickness / 2;
+                segments[10].Y = segments[0].Y + mThickness + mThickness / 2;
+                segments[10].TrgX = segments[6].X + mWidth / 2 - mThickness / 2;
+                segments[10].TrgY = segments[6].Y - mThickness / 2;
 
                 // L
                 segments[11].Orientation = Segment.Orientations.Diagonal;
-                segments[11].X = segments[2].X + mThickness / 2;
-                segments[11].Y = segments[3].Y + mThickness / 2;
-                segments[11].TrgX = segments[6].X + mWidth / 2;
-                segments[11].TrgY = segments[6].Y + mThickness / 2;
+                segments[11].X = segments[2].X - mThickness / 2;
+                segments[11].Y = segments[3].Y - mThickness / 2;
+                segments[11].TrgX = segments[6].X + mWidth / 2 + mThickness / 2;
+                segments[11].TrgY = segments[6].Y + mThickness + mThickness / 2;
 
                 // H
                 segments[7].Orientation = segments[6].Orientation;
-                segments[7].X = segments[6].X + mWidth / 2 + mPadding;
+                segments[7].X = segments[6].X + mWidth / 2 + mPadding / 2 + mThickness / 2;
                 segments[7].Y = segments[6].Y;
-                segments[7].Width = mWidth / 2 - mPadding/2;
+                segments[7].Width = mWidth / 2 - mThickness / 2;
 
                 // G Redefinition
-                segments[6].Width = mWidth / 2 - mPadding/2;
+                segments[6].X -= mPadding / 2;
+                segments[6].Width = mWidth / 2 - mThickness / 2;
 
                 // M
                 segments[12].Orientation = Segment.Orientations.Vertical;
                 segments[12].X = segments[0].X + mWidth / 2 - mThickness / 2;
-                segments[12].Y = segments[5].Y;
+                segments[12].Y = segments[5].Y + mThickness / 2 - mPadding;
+                segments[12].Height -= 2 * mThickness - mPadding;
 
                 // N
                 segments[13].Orientation = Segment.Orientations.Vertical;
                 segments[13].X = segments[0].X + mWidth / 2 - mThickness / 2;
-                segments[13].Y = segments[4].Y;
+                segments[13].Y = segments[6].Y + 2 * mThickness + mPadding;
+                segments[13].Height -= 2*mThickness - mPadding;
             }
         }
     }

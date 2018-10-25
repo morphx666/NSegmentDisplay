@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,9 +22,9 @@ namespace NSegmentDisplay {
         private int padding = 4;
 
         private NSegmentsCollection sscDemo = new NSegmentsCollection() {
-            Width = 18,
+            Width = 22,
             Height = 26,
-            Thickness = 6,
+            Thickness = 4,
             ForeColorOff = Color.FromArgb(202, 202, 202),
             ForeColorOn = Color.FromArgb(31, 31, 86),
             BackColor = Color.FromArgb(211, 211, 211)
@@ -46,6 +47,7 @@ namespace NSegmentDisplay {
             LabelHelp2.ForeColor = ssc.ForeColorOn;
 
             Task.Run(() => {
+                Thread.Sleep(250);
                 while(true) {
                     lock(ssc) {
                         ValueTo7Segments(To12(DateTime.Now.Hour), 0, 2);
@@ -60,7 +62,7 @@ namespace NSegmentDisplay {
                         sscDemo.Text = $"Mode {n} Segments";
                     }
                     this.Invalidate();
-                    System.Threading.Thread.Sleep(10);
+                    Thread.Sleep(10);
                 }
             });
 
@@ -180,6 +182,7 @@ namespace NSegmentDisplay {
         }
 
         private void FormMain_Paint(object sender, PaintEventArgs e) {
+            //e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             lock(ssc) {
                 ssc.Render(e.Graphics);
                 sscDemo.Render(e.Graphics);
