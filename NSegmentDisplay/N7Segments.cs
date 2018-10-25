@@ -3,6 +3,14 @@ using System.Drawing;
 
 // Container for a set of seven segments
 
+//        A
+//        −
+//    F | G | B
+//        −
+//    E |   | C
+//        −
+//        D
+
 namespace NSegmentDisplay {
     public class N7Segments : NSegments {
         public N7Segments() {

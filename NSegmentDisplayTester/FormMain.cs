@@ -43,7 +43,7 @@ namespace NSegmentDisplay {
                         ValueTo7Segments(DateTime.Now.Minute, 2, 2);
                         ValueTo7Segments(DateTime.Now.Second, 4, 2);
                         ValueTo7Segments(DateTime.Now.Millisecond, 6, 3);
-                        ssc[ssc.Count - 1].Value = DateTime.Now.Hour < 12 ? 0xA : ssc[ssc.Count - 1].Encodings.Count - 1;
+                        ssc[ssc.Count - 1].Value = DateTime.Now.Hour < 12 ? 0xA : supportedDisplayIndex < 2 ? ssc[ssc.Count - 1].Encodings.Count - 1 : 25;
                     }
                     this.Invalidate();
                     System.Threading.Thread.Sleep(10);
@@ -56,7 +56,11 @@ namespace NSegmentDisplay {
                 lock(ssc) {
                     switch(e1.KeyCode) {
                         case Keys.Left:
-                            supportedDisplayIndex = Math.Abs(supportedDisplayIndex - 1) % supportedDisplays.Length;
+                            if(supportedDisplayIndex == 0) {
+                                supportedDisplayIndex = supportedDisplays.Length - 1;
+                            } else {
+                                supportedDisplayIndex -= 1;
+                            }
                             CreateDisplay();
                             break;
                         case Keys.Right:
@@ -118,7 +122,7 @@ namespace NSegmentDisplay {
 
                 ssc.Add(display);
             }
-            ssc[ssc.Count - 1].Encodings.Add(0b1110011); // P
+            if(supportedDisplayIndex < 2) ssc[ssc.Count - 1].Encodings.Add(0b1110011); // P
 
             CenterDisplay();
         }

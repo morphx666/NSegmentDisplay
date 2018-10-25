@@ -1,5 +1,13 @@
 ﻿// https://en.wikipedia.org/wiki/Nine-segment_display
 
+//          A
+//          −
+//    F | H / | B
+//        G −
+//    E | I / | C
+//          −
+//          D
+
 namespace NSegmentDisplay {
     public class N9Segments : N7Segments {
         public N9Segments() : base() {
@@ -35,22 +43,22 @@ namespace NSegmentDisplay {
 
             if(segments.Length == 9) {
                 // H
-                base.segments[7].Orientation = Segment.Orientations.Diagonal;
-                base.segments[7].X = segments[6].X;
-                base.segments[7].Y = segments[6].Y;
-                base.segments[7].SrcX = base.segments[4].X;
-                base.segments[7].SrcY = segments[6].Y + Thickness / 2;
-                base.segments[7].TrgX = base.segments[1].X;
-                base.segments[7].TrgY = segments[0].Y;
+                segments[7].Orientation = Segment.Orientations.Diagonal;
+                segments[7].X = segments[6].X;
+                segments[7].Y = segments[6].Y;
+                segments[7].X = segments[5].X + mThickness / 2;
+                segments[7].Y = segments[6].Y + mThickness / 2;
+                segments[7].TrgX = segments[1].X + mThickness / 2;
+                segments[7].TrgY = segments[0].Y + mThickness / 2;
 
                 // I
-                base.segments[8].Orientation = Segment.Orientations.Diagonal;
-                base.segments[8].X = segments[3].X;
-                base.segments[8].Y = segments[3].Y;
-                base.segments[8].SrcX = base.segments[4].X;
-                base.segments[8].SrcY = segments[3].Y + Thickness / 2;
-                base.segments[8].TrgX = base.segments[1].X;
-                base.segments[8].TrgY = segments[6].Y + Thickness / 2;
+                segments[8].Orientation = Segment.Orientations.Diagonal;
+                segments[8].X = segments[3].X;
+                segments[8].Y = segments[3].Y;
+                segments[8].X = segments[4].X + mThickness / 2;
+                segments[8].Y = segments[3].Y + mThickness / 2;
+                segments[8].TrgX = segments[2].X + mThickness / 2;
+                segments[8].TrgY = segments[6].Y + mThickness / 2;
             }
         }
     }

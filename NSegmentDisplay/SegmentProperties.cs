@@ -13,8 +13,6 @@ namespace NSegmentDisplay {
         public Color ForeColorOn { get; set; }
         public Color BackColor { get; set; }
 
-        public int SrcX { get; set; }
-        public int SrcY { get; set; }
         public int TrgX { get; set; }
         public int TrgY { get; set; }
 
