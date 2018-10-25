@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -126,6 +127,24 @@ namespace NSegmentDisplay {
                     if(b.Bottom > r.Bottom) r.Height = b.Bottom - mY;
                 });
                 return r;
+            }
+        }
+
+        public string Text {
+            get {
+                return "";
+            }
+            set {
+                for(int i = NSegments.Count - 1; i >= 0; i--) {
+                    char c = i < value.Length ? value[i] : ' ';
+                    if(char.IsDigit(c)) {
+                        NSegments[i].Value = (int)c - (int)'0';
+                    } else if(c==' ') {
+                        NSegments[i].Value = NSegments[i].Encodings.Count - 1;
+                    } else if(char.IsLetter(c)) {
+                        NSegments[i].Value = (int)(c.ToString().ToUpper()[0]) - (int)'A' + 10;
+                    }
+                }
             }
         }
 

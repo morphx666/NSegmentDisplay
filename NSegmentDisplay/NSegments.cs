@@ -132,7 +132,7 @@ namespace NSegmentDisplay {
             for(int i = segments.Length - 1; i >= 0; i--) {
             //for(int i = 0; i <segments.Length; i++) {
                 segments[i].State = (encoding & (int)Math.Pow(2, i)) != 0;
-                segments[i].Render(g, mPadding);
+                segments[i].Render(g);
             }
         }
     }

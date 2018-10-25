@@ -20,6 +20,15 @@ namespace NSegmentDisplay {
         private int supportedDisplayIndex = 0;
         private int padding = 4;
 
+        private NSegmentsCollection sscDemo = new NSegmentsCollection() {
+            Width = 18,
+            Height = 26,
+            Thickness = 6,
+            ForeColorOff = Color.FromArgb(202, 202, 202),
+            ForeColorOn = Color.FromArgb(31, 31, 86),
+            BackColor = Color.FromArgb(211, 211, 211)
+        };
+
         public FormMain() {
             InitializeComponent();
 
@@ -44,6 +53,11 @@ namespace NSegmentDisplay {
                         ValueTo7Segments(DateTime.Now.Second, 4, 2);
                         ValueTo7Segments(DateTime.Now.Millisecond, 6, 3);
                         ssc[ssc.Count - 1].Value = DateTime.Now.Hour < 12 ? 0xA : supportedDisplayIndex < 2 ? ssc[ssc.Count - 1].Encodings.Count - 1 : 25;
+                        //ssc.NSegments.ForEach((sc) => sc.Value = 0xA);
+
+                        string m = supportedDisplays[supportedDisplayIndex].ToString().Split('.')[1];
+                        int n = int.Parse(m.Substring(1, m.IndexOf("S") - 1));
+                        sscDemo.Text = $"Mode {n} Segments";
                     }
                     this.Invalidate();
                     System.Threading.Thread.Sleep(10);
@@ -96,7 +110,10 @@ namespace NSegmentDisplay {
             Rectangle a = this.DisplayRectangle;
             Rectangle b = ssc.Bounds;
             ssc.X = (a.Width - b.Width) / 2;
-            ssc.Y = (a.Height - b.Height) / 2;
+            ssc.Y = (a.Height - b.Height) / 2 + b.Height / 2;
+
+            sscDemo.Y = ssc.Y - 3 * sscDemo.Height - 20;
+            sscDemo.X = (a.Width - sscDemo.Bounds.Width) / 2;
         }
 
         private void CreateDisplay() {
@@ -124,6 +141,25 @@ namespace NSegmentDisplay {
             }
             if(supportedDisplayIndex < 2) ssc[ssc.Count - 1].Encodings.Add(0b1110011); // P
 
+            sscDemo.Clear();
+            for(int i = 0; i < 20; i++) {
+                NSegments display = new N14Segments {
+                    Width = sscDemo.Width,
+                    Height = sscDemo.Height,
+                    Thickness = sscDemo.Thickness,
+                    Padding = 2
+                };
+
+                display.X = sscDemo.X + i * (display.Bounds.Width + 4);
+                display.Y = sscDemo.Y;
+                display.ForeColorOff = sscDemo.ForeColorOff;
+                display.ForeColorOn = sscDemo.ForeColorOn;
+                display.BackColor = sscDemo.BackColor;
+
+                sscDemo.Add(display);
+                sscDemo.Text = "";
+            }
+
             CenterDisplay();
         }
 
@@ -146,6 +182,7 @@ namespace NSegmentDisplay {
         private void FormMain_Paint(object sender, PaintEventArgs e) {
             lock(ssc) {
                 ssc.Render(e.Graphics);
+                sscDemo.Render(e.Graphics);
             }
         }
     }

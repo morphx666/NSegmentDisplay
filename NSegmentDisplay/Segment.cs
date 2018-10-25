@@ -21,12 +21,12 @@ namespace NSegmentDisplay {
             State = false;
         }
 
-        public void Render(Graphics g, int padding) {
+        public void Render(Graphics g) {
             using(SolidBrush bb = new SolidBrush(BackColor)) {
                 using(SolidBrush bf = new SolidBrush(State ? ForeColorOn : ForeColorOff)) {
                     switch(Orientation) {
                         case Orientations.Horizontal:
-                            g.FillRectangle(bb, X - Thickness, Y, Width + 2 * Thickness, Thickness);
+                            g.FillRectangle(bb, X - Thickness, Y, Width + (float)1.5 * Thickness, Thickness);
                             g.FillRectangle(bf, X, Y, Width, Thickness);
                             break;
                         case Orientations.Vertical:
